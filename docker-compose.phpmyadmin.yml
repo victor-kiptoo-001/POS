@@ -1,0 +1,20 @@
+version: '2.2'
+
+include:
+  - docker-compose.dev.yml
+
+services:
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: always
+        depends_on:
+          - mysql
+        ports:
+          - "8000:80"
+        networks:
+          - app_net
+        environment:
+          - MYSQL_USERNAME=admin
+          - MYSQL_ROOT_PASSWORD=pointofsale
+          - PMA_HOST=mysql
